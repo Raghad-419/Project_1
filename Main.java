@@ -1,159 +1,171 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int userWin=0;
+        int computerWin=0;
 
-       try {
-           int num = 0;
-           ArrayList<String> history = new ArrayList<>();
-           do {
-               boolean validInput=false;
-               while (!validInput) {
-                   System.out.println("Welcome to calculator");
-                   System.out.println("Enter 1 to addition the numbers");
-                   System.out.println("Enter 2 to subtraction the numbers");
-                   System.out.println("Enter 3 to multiplication the numbers");
-                   System.out.println("Enter 4 to division the numbers");
-                   System.out.println("Enter 5 to modulus the numbers");
-                   System.out.println("Enter 6 to find minimum number");
-                   System.out.println("Enter 7 to find maximum number");
-                   System.out.println("Enter 8 to find the average of numbers");
-                   System.out.println("Enter 9 to print the last result in calculator");
-                   System.out.println("Enter 10 to print the list of all results in calculator");
-                   System.out.println("Enter 11 to exit");
-                   try {
-                       num = input.nextInt();
-                       check(num);
-                       validInput = true;
-                   } catch (IllegalArgumentException e) {
-                       System.out.println(e.getMessage());
-                   } catch (InputMismatchException e) {
-                       System.out.println("Enter correct number ");
-                       input.nextLine();
-                   }
-               }
-               switch (num) {
-                   case 1:
-                       double sum = 0;
-                       System.out.println("Enter first number");
-                       double num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       double num2 = input.nextDouble();
-                       sum = num1 + num2;
-                       System.out.println("The sum of numbers = " + sum);
-                       history.add("The sum of numbers = " + sum);
-                       break;
-                   case 2:
-                       double sub = 0;
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       sub = num1 - num2;
-                       System.out.println("The subtraction of numbers = " + sub);
-                       history.add("The subtraction of numbers = " + sub);
-                       break;
-                   case 3:
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       double multy = num2 * num1;
-                       System.out.println("The multiplication of numbers = " + multy);
-                       history.add("The multiplication of numbers = " + multy);
-                       break;
-                   case 4:
-                       double divide = 1;
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       while (num2==0){
-                           System.out.println("Can't divide on zero , Enter valid number ");
-                           num2 = input.nextDouble();
-                       }
-                       divide = num1 / num2;
-                       System.out.println("The result of division is = " + divide);
-                       history.add("The result of division is = " + divide);
+        System.out.println("Welcome to to 3x3 Tic Tac Toe");
+        System.out.println("Chose number of rounds \n1-Play one round \n2- Play 3 rounds and then determine the winner ");
+        int round = input.nextInt();
 
-                       break;
-                   case 5:
-                       double mod = 0;
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       mod = num1 % num2;
-                       System.out.println("The result of modulus = " + mod);
-                       history.add("The result of modulus = " + mod);
-                       break;
-                   case 6:
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       if (num1 < num2) {
-                           System.out.println("Minimum number is : " + num1);
-                           history.add("Minimum number is : " + num1);
-                       } else if(num2<num1) {
-                           System.out.println("Minimum number is : " + num2);
-                           history.add("Minimum number is : " + num2);
-                       }else {
-                           System.out.println(num1+" equal "+num2);
-                           history.add(num1+" equal "+num2);
-                       }
-                       break;
-                   case 7:
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       if (num1 > num2) {
-                           System.out.println("Maximum number is : " + num1);
-                           history.add("Maximum number is : " + num1);
-                    } else if(num2>num1) {System.out.println("Maximum number is : " + num2);
-                       history.add("Maximum number is : " + num2);}
-                       else {System.out.println(num1+" equal "+num2);
-                       history.add(num1+" equal "+num2);}
-                       break;
-                   case 8:
-                       sum = 0;
-                       System.out.println("Enter first number");
-                       num1 = input.nextDouble();
-                       System.out.println("Enter second number");
-                       num2 = input.nextDouble();
-                       sum = num1 + num2;
-                       double avg = sum / 2;
-                       System.out.println("Average= " + avg);
-                       history.add("Average= " + avg);
-                       break;
-                   case 9:
-                       if(!history.isEmpty())
-                       { System.out.println(history.getLast());}
-                       else System.out.println("No history available.");
-                       break;
-                   case 10:
-                       if(!history.isEmpty()){
-                       System.out.println(history);}
-                       else System.out.println("No history available.");
-                       break;
-               }
-           } while (num != 11);
-       } catch (InputMismatchException e){
-           System.out.println("Enter Valid number ");
-       }
-    }//end main
+        while (round!=2&&round!=1) {
+            System.out.println("Please choose 1 or 2 rounds");
+            round = input.nextInt();
+        }
+        int maxRounds = round == 1 ? 1 : 3;
+            for (int i = 0; i < maxRounds; i++) {
+                String[][] board = resetBoard();
+                String winner = null;
+                String turn = "X";
 
-    public static void check(int num)throws IllegalArgumentException{
-        if(num>11||num<1){
-            throw new IllegalArgumentException("Please enter number from 1 to 11");
+                System.out.println("Let's start round " + (i + 1));
+                printBoard(board);
+                System.out.println("X will play first, Enter a slot number to place X in:");
+
+                //Player turn
+                while (winner == null) {
+                    int numInput;
+                    try {
+                        numInput = input.nextInt();
+                        if (numInput < 1 || numInput > 9) {
+                            System.out.println("Invalid input; re-enter slot number:");
+                            continue;
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println(
+                                "Invalid input; re-enter slot number:");
+                        continue;
+                    }//end try
+
+                    int row = (numInput - 1) / 3;
+                    int col = (numInput - 1) % 3;
+                    if (board[row][col].equals(String.valueOf(numInput))) {
+                        board[row][col] = turn;
+
+                        printBoard(board);
+                        winner = checkWinner(board);
+
+                        //Computer turn
+                        if (winner == null) {
+                            turn = "O";
+                            int computerMove;
+                            do {
+                                computerMove = random.nextInt(9) + 1;
+                                row = (computerMove - 1) / 3;
+                                col = (computerMove - 1) % 3;
+                            } while (!board[row][col].equals(String.valueOf(computerMove)));
+
+                            board[row][col] = turn;
+                            System.out.println("Computer place O in " + computerMove);
+                            printBoard(board);
+                            winner = checkWinner(board);
+                            turn = "X";
+                        }
+                    }//end if
+                    else System.out.println("Slot already taken; re-enter slot number:");
+
+                }//end while
+                if ("X".equals(winner)) {
+                    userWin++;
+                    System.out.println("You win this round!");
+                } else if ("O".equals(winner)) {
+                    computerWin++;
+                    System.out.println("Computer win this round!");
+                } else System.out.println("It's a draw for this round!");
+
+            }  //end for loop
+            //Display final score
+                System.out.println("Final score : you- "+userWin+" , Computer - "+computerWin);
+                if(userWin>computerWin){
+                    System.out.println("Congratulations! You are the overall winner!");
+                }else if (computerWin>userWin){
+                    System.out.println("Computer is the overall winner! Better luck next time!");
+                }else System.out.println("It's a draw! Thanks for playing.");
+
+
+
+
+        }//end main
+
+public static String[][] resetBoard(){
+    String[][] board = new String[3][3];
+    int count = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = String.valueOf(count + 1);
+            count++;
         }
     }
-
+    return board;
 }
+
+    public static void printBoard(String[][] board) throws IllegalArgumentException {
+        if (board.length != 3 || board[0].length != 3) {
+            throw new IllegalArgumentException("Board must have 3x3 elements");
+        }
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println(board[i][0] + " | " + board[i][1] + " | " + board[i][2]);
+            if (i < 2) {
+                System.out.println("----------");
+            }
+        }
+
+    }
+
+    public static String checkWinner(String[][] board) {
+        String line = null;
+        int i = 0;
+        int j = 0;
+        for (int a = 0; a < 8; a++) {
+            switch (a) {
+                case 0:
+                    line = board[i][j] + board[i][j + 1] + board[i][j + 2];
+                    break;
+                case 1:
+                    line = board[i + 1][j] + board[i + 1][j + 1] + board[i + 1][j + 2];
+                    break;
+                case 2:
+                    line = board[i + 2][j] + board[i + 2][j + 1] + board[i + 2][j + 2];
+                    break;
+                case 3:
+                    line = board[i][j] + board[i + 1][j] + board[i + 2][j];
+                    break;
+                case 4:
+                    line = board[i][j + 1] + board[i + 1][j + 1] + board[i + 2][j + 1];
+                    break;
+                case 5:
+                    line = board[i][j + 2] + board[i + 1][j + 2] + board[i + 2][j + 2];
+                    break;
+                case 6:
+                    line = board[i][j] + board[i + 1][j + 1] + board[i + 2][j + 2];
+                    break;
+                case 7:
+                    line = board[i][j + 2] + board[i + 1][j + 1] + board[i + 2][j];
+            }
+
+
+            if (line.equals("XXX")) {
+                return "X";
+            } else if (line.equals("OOO"))
+                return "O";
+        }//end loop
+
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                if (!board[r][c].equals("X") && !board[r][c].equals("O")) {
+                    return null;
+                }
+            }
+        }
+return "draw";
+    }
+
+
+
+}//end class
